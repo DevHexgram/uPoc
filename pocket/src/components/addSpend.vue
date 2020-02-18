@@ -151,7 +151,7 @@
                 if (this.cost.Number === "") {
                     return "$-0"
                 }
-                return "$-0" + this.cost.Number
+                return "$-" + this.cost.Number
             },
             /**
              * @return {string}
