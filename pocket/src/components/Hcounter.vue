@@ -7,7 +7,7 @@
     <!--                placeholder="add new spend"-->
     <!--        />-->
     <div>
-        <spends-item-list/>
+        <spends-item-list />
         <div>
             <van-swipe-cell v-on:open="openAdd">
                 <template slot="left">
@@ -33,7 +33,7 @@
             </van-swipe-cell>
         </div>
 
-        <add-spend v-bind:is-show="controlShowCOSTAdd" v-on:close="controlShowCOSTAdd=false"/>
+        <add-spend v-bind:is-show="controlShowCOSTAdd" v-on:close="controlShowCOSTAdd=false" />
     </div>
 </template>
 
@@ -42,8 +42,6 @@
     // import baseInput from "./baseInput";
     import addSpend from "./addSpend";
 
-
-    let nextId = 1
     export default {
         name: "HCounter",
         components: {
@@ -55,30 +53,13 @@
         data() {
             return {
                 controlShowCOSTAdd: false,
-                newSpend: '',
-                spends: [
-                    {
-                        id: nextId++,
-                        text: "明日方舟充值",
-                        spend: -648
-                    },
-                    {
-                        id: nextId++,
-                        text: "anne pro 2",
-                        spend: -300
-                    },
-                    {
-                        id: nextId++,
-                        text: "ikbc poker",
-                        spend: -200
-                    }
-                ]
+                controlRefresh: false,
             }
         },
         methods: {
             openAdd: function (position) {
-                console.log(position.position);
-                if (position.position == "left") {
+                // console.log(position.position);
+                if (position.position === "left") {
                     this.controlShowCOSTAdd = true
                 }
             },

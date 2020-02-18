@@ -22,23 +22,25 @@ const localForage = require('localforage')
 //
 // export default mlf
 
-export function addSpend(cost,type) {
+export async function addSpend(cost) {
+    console.log(cost)
     let affair = {
         creat_at: Date(),
         update_at: Date(),
         delete_at: "",
-        type:type,
+        type: '-',
         data: {
-            title: cost.Title,
-            number: cost.Number,
-            date: cost.Date,
-            type: cost.Type,
-            extra: cost.Extra
+            Title: cost.Title,
+            Number: '-' + cost.Number,
+            Date: cost.Date,
+            Type: cost.Type,
+            Extra: cost.Extra
         },
     }
     localForage.config({storeName: "spend_list"})
-    localForage.length().then(function (numberOfKeys) {
+    await localForage.length().then((numberOfKeys) => {
         localForage.setItem((numberOfKeys + 1).toString(), affair).then(() => {
+            console.log("done")
         }).catch(e => {
             console.log(e)
         })
@@ -49,7 +51,7 @@ export function addSpend(cost,type) {
 
 export async function getAllAffairs() {
     let affairs = []
-    let tempKey =  0
+    let tempKey = 0
     localForage.config({storeName: "spend_list"})
     return await localForage.iterate((value, key) => {
         affairs[tempKey] = value

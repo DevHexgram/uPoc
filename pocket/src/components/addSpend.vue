@@ -3,13 +3,13 @@
         <van-popup
                 v-model="isShow"
                 position="top"
-                v-on:close="control"
                 v-on:click-overlay="control"
                 v-bind:close-on-click-overlay="false"
         >
             <van-form @submit="add" ref="Form">
 
                 <van-field v-model="cost.Title"
+                           clickable
                            label="简述"
                            :rules="[{ required: true, message: '请填写简述' }]"
                 />
@@ -18,23 +18,27 @@
                            readonly
                            clickable
                            @touchstart.native.stop="showNumberKey = true"
-                           type="digit"
                            label="金额"
                            :rules="[{ required: true, message: '请填写金额' }]"
                 />
                 <van-field v-model="cost.Type"
                            label="类型"
                            readonly
+                           clickable
                            v-on:click="showPicker=true"
                            :rules="[{ required: true, message: '请选择类型' }]"/>
                 <van-field label="日期"
                            :placeholder="NowTime"
                            readonly
+                           clickable
                            :rules="[{ required: true, message: '请选择日期' }]"
-                           v-bind:value="cost.Date"
+                           v-bind:value="DateForShow"
                            v-on:click="showCalendar=true"
                 />
-                <van-field v-model="cost.Extra" label="备注"/>
+                <van-field v-model="cost.Extra"
+                           clickable
+                           label="备注"
+                />
                 <van-cell style="background-color: lightblue" clickable v-on:click="submitForm">
                     <van-icon
                             slot="right-icon"
@@ -51,6 +55,9 @@
                           get-container="body"
                           title="Hex"
                           :round="false"
+                          :min-date="minDate"
+                          :max-date="maxDate"
+                          :default-date="defaultDate"
                           :style="{ height: '450px' }"
             />
 
@@ -58,7 +65,7 @@
                     style="height: 216px"
                     v-model="cost.Number"
                     :show="showNumberKey"
-                    :maxlength="6"
+                    :maxlength="7"
                     @blur="showNumberKey = false"
                     extra-key="."
             />
@@ -87,8 +94,8 @@
 </template>
 
 <script>
-    import {addSpend} from "../indexedDB/indexedDB";
-    // import {Toast} from 'vant';
+    import store from "../store/index"
+    import moment from "moment";
 
     export default {
         name: "addSpend",
@@ -123,11 +130,14 @@
                 showCalendar: false,
                 showPicker: false,
                 showNumberKey: false,
-                NowTime:new Date().toLocaleDateString('zh-CN'),
+                NowTime: new Date().toLocaleDateString('zh-CN'),
+                defaultDate: new Date(),
+                minDate: moment().subtract(6, 'months').toDate(),
+                maxDate: moment().add(2, 'months').toDate(),
                 cost: {
                     Title: "",
                     Number: "",
-                    Date: "",
+                    Date: new Date(),
                     Type: "",
                     Extra: "无"
                 },
@@ -138,7 +148,16 @@
              * @return {string}
              */
             NumberForShow: function () {
-                return "-$" + this.cost.Number
+                if (this.cost.Number === "") {
+                    return "$-0"
+                }
+                return "$-0" + this.cost.Number
+            },
+            /**
+             * @return {string}
+             */
+            DateForShow: function () {
+                return this.formatDate(this.cost.Date)
             }
         },
         model: {
@@ -148,7 +167,7 @@
         props: {
             isShow: {
                 type: Boolean,
-                default: true
+                default: false
             }
         },
         methods: {
@@ -158,12 +177,21 @@
             control() {
                 this.$emit('close', this.isShow)
             },
-            add() {
+            async add() {
                 this.control()
-                addSpend(this.cost,"-")
-                for (let key in this.cost) {
-                    this.cost[key] = ""
-                }
+                // console.log(this.cost)
+                await store.dispatch("addCost", {cost: this.cost}).then(() => {
+                    for (let key in this.cost) {
+                        if (key === "Date") {
+                            continue
+                        } else if (key === "Extra") {
+                            this.cost[key] = "无"
+                        } else {
+                            this.cost[key] = ""
+                        }
+                    }
+                    // this.$emit("add-done")
+                })
             },
             chooseType(type) {
                 this.cost.Type = type
@@ -174,7 +202,7 @@
             },
             onConfirm(date) {
                 this.showCalendar = false;
-                this.cost.Date = this.formatDate(date);
+                this.cost.Date = date;
             }
         },
     }
