@@ -1,5 +1,13 @@
 const localForage = require('localforage')
 
+let storeForIncome = localForage.createInstance({
+    storeName: "income_list"
+})
+
+let storeForSpend = localForage.createInstance({
+    storeName: "spend_list"
+})
+
 // localForage.config({
 //     name: 'spendList',
 //     storeName: '表名或集合名',
@@ -22,8 +30,36 @@ const localForage = require('localforage')
 //
 // export default mlf
 
+export async function addIncome(income) {
+    // console.log(cost)
+    let affair = {
+        creat_at: Date(),
+        update_at: Date(),
+        delete_at: "",
+        type: '+',
+        data: {
+            Title: income.Title,
+            Number: income.Number,
+            Date: income.Date,
+            Type: income.Type,
+            Extra: income.Extra
+        },
+    }
+    // await localForage.config({storeName: "income_list"})
+    // console.log(localForage.config())
+    await storeForIncome.length().then((numberOfKeys) => {
+        storeForIncome.setItem((numberOfKeys + 1).toString(), affair).then(() => {
+            // console.log("done")
+        }).catch(e => {
+            console.log(e)
+        })
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 export async function addSpend(cost) {
-    console.log(cost)
+    // console.log(cost)
     let affair = {
         creat_at: Date(),
         update_at: Date(),
@@ -37,10 +73,10 @@ export async function addSpend(cost) {
             Extra: cost.Extra
         },
     }
-    localForage.config({storeName: "spend_list"})
-    await localForage.length().then((numberOfKeys) => {
-        localForage.setItem((numberOfKeys + 1).toString(), affair).then(() => {
-            console.log("done")
+    // await localForage.config({storeName: "spend_list"})
+    await storeForSpend.length().then((numberOfKeys) => {
+        storeForSpend.setItem((numberOfKeys + 1).toString(), affair).then(() => {
+            // console.log("done")
         }).catch(e => {
             console.log(e)
         })
@@ -52,8 +88,8 @@ export async function addSpend(cost) {
 export async function getAllAffairs() {
     let affairs = []
     let tempKey = 0
-    localForage.config({storeName: "spend_list"})
-    return await localForage.iterate((value, key) => {
+    // storeForSpend.config({storeName: "spend_list"})
+    return await storeForSpend.iterate((value, key) => {
         affairs[tempKey] = value
         affairs[tempKey].key = key
         tempKey++

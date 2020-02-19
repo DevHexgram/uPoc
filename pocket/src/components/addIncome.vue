@@ -9,7 +9,7 @@
         >
             <van-form @submit="add" ref="Form">
 
-                <van-field v-model="cost.Title"
+                <van-field v-model="income.Title"
                            clickable
                            label="简述"
                            :rules="[{ required: true, message: '请填写简述' }]"
@@ -22,7 +22,7 @@
                            label="金额"
                            :rules="[{ required: true, message: '请填写金额' }]"
                 />
-                <van-field v-model="cost.Type"
+                <van-field v-model="income.Type"
                            label="类型"
                            readonly
                            clickable
@@ -36,11 +36,11 @@
                            v-bind:value="DateForShow"
                            v-on:click="showCalendar=true"
                 />
-                <van-field v-model="cost.Extra"
+                <van-field v-model="income.Extra"
                            clickable
                            label="备注"
                 />
-                <van-cell style="background-color: RGBA(255,151,106,0.5)" clickable v-on:click="submitForm">
+                <van-cell style="background-color: RGBA(7,193,96,0.3)" clickable v-on:click="submitForm">
                     <van-icon
                             slot="right-icon"
                             name="shopping-cart-o"
@@ -64,7 +64,7 @@
 
             <van-number-keyboard
                     style="height: 216px"
-                    v-model="cost.Number"
+                    v-model="income.Number"
                     :show="showNumberKey"
                     :maxlength="7"
                     @blur="showNumberKey = false"
@@ -99,33 +99,29 @@
     import moment from "moment";
 
     export default {
-        name: "addSpend",
+        name: "addIncome",
         data() {
             return {
                 costType: [
                     {
-                        text: "日常费用",
-                        icon: "bag-o"
+                        text: "工作收入",
+                        icon: "paid"
                     },
                     {
-                        text: "固定支出",
-                        icon: "balance-list-o"
+                        text: "固定收入",
+                        icon: "home-o" //意义不明
                     },
                     {
-                        text: "大项消费",
-                        icon: "gem-o"
+                        text: "理财收入",
+                        icon: "chart-trending-o"
                     },
                     {
-                        text: "往来开销",
-                        icon: "friends-o"
+                        text: "外快收入",
+                        icon: "point-gift-o"
                     },
                     {
-                        text: "娱乐开支",
-                        icon: "cashier-o"
-                    },
-                    {
-                        text: "其它消费",
-                        icon: "gold-coin-o"
+                        text: "其它收入",
+                        icon: "apps-o" //意义不明
                     },
                 ],
                 showCalendar: false,
@@ -135,7 +131,7 @@
                 defaultDate: new Date(),
                 minDate: moment().subtract(6, 'months').toDate(),
                 maxDate: moment().add(2, 'months').toDate(),
-                cost: {
+                income: {
                     Title: "",
                     Number: "",
                     Date: new Date(),
@@ -149,16 +145,16 @@
              * @return {string}
              */
             NumberForShow: function () {
-                if (this.cost.Number === "") {
-                    return "$-0"
+                if (this.income.Number === "") {
+                    return "$0"
                 }
-                return "$-" + this.cost.Number
+                return "$" + this.income.Number
             },
             /**
              * @return {string}
              */
             DateForShow: function () {
-                return this.formatDate(this.cost.Date)
+                return this.formatDate(this.income.Date)
             }
         },
         model: {
@@ -185,21 +181,21 @@
             async add() {
                 this.control()
                 // console.log(this.cost)
-                await store.dispatch("addCost", {cost: this.cost}).then(() => {
-                    for (let key in this.cost) {
+                await store.dispatch("addIncome", {income: this.income}).then(() => {
+                    for (let key in this.income) {
                         if (key === "Date") {
                             continue
                         } else if (key === "Extra") {
-                            this.cost[key] = "无"
+                            this.income[key] = "无"
                         } else {
-                            this.cost[key] = ""
+                            this.income[key] = ""
                         }
                     }
                     // this.$emit("add-done")
                 })
             },
             chooseType(type) {
-                this.cost.Type = type
+                this.income.Type = type
                 this.showPicker = false
             },
             formatDate(date) {
@@ -207,7 +203,7 @@
             },
             onConfirm(date) {
                 this.showCalendar = false;
-                this.cost.Date = date;
+                this.income.Date = date;
             }
         },
     }

@@ -44,7 +44,7 @@
                            :disabled="isNotModifying"
                            label="备注"
                 />
-                <van-cell style="background-color: #FFB61E" clickable v-on:click="submitForm">
+                <van-cell style="background-color:#ff976a" clickable v-on:click="submitForm">
                     <van-icon
                             slot="right-icon"
                             name="edit"
@@ -109,7 +109,7 @@
                 return this.formatDate(this.affair.data.Date)
             },
             numberForShow() {
-                return "$-" + this.affair.data.Number.replace("-","")
+                return "$-" + this.affair.data.Number.replace("-", "")
             },
         },
     }

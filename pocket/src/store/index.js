@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {addSpend, getAllAffairs} from "../indexedDB/indexedDB";
+import {addIncome, addSpend, getAllAffairs} from "../indexedDB/indexedDB";
 
 Vue.use(Vuex)
 
@@ -9,6 +9,20 @@ export default new Vuex.Store({
         AffairsData: []
     },
     mutations: {},
+    getters: {
+        AffairSorted: state => {
+            return state.AffairsData.sort((a, b) => {
+                if (a.data.Date.getTime() > b.data.Date.getTime()) {
+                    // console.log(a.data.Date.getTime())
+                    // console.log(b.data.Date.getTime())
+                    // console.log(a.data.Date.getTime()- b.data.Date.getTime())
+                    return -1;
+                } else {
+                    return 1;
+                }
+            })
+        },
+    },
     actions: {
         async refresh(context) {
             await getAllAffairs().then((value) => {
@@ -18,6 +32,10 @@ export default new Vuex.Store({
         async addCost(context, payload) {
             // console.log(payload.cost)
             await addSpend(payload.cost)
+            await context.dispatch("refresh")
+        },
+        async addIncome(context, payload) {
+            await addIncome(payload.income)
             await context.dispatch("refresh")
         },
     },

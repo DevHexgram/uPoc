@@ -1,10 +1,11 @@
 <template>
 
-    <div >
+    <div ref="toptop">
         <!--        get-container="body"-->
         <van-tabs animated swipeable sticky>
-            <van-tab title="账目" >
-                <div :style="{height: trueHeight-44+'px'}">
+            <van-tab title="账目">
+                                <div :style="{minHeight: trueHeight-44+'px'}">
+<!--                <div get-container="body" >-->
                     <HCounter/>
                 </div>
             </van-tab>
@@ -17,7 +18,6 @@
 
             </van-tab>
         </van-tabs>
-
 
 
         <!--                <router-view/>-->
@@ -36,14 +36,16 @@
         },
         data() {
             return {
-                trueHeight:document.body.clientHeight
+                trueHeight: document.body.clientHeight,
+                test:this.$refs.toptop
             }
         },
+
     }
 </script>
 
 <style>
-    html,body{
+    html, body {
         height: 100%;
     }
 </style>
