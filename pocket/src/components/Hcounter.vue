@@ -10,7 +10,9 @@
         <spends-item-list/>
 
 <!--        <van-sticky :container="container">-->
-            <van-swipe-cell v-on:open="openAdd" :stop-propagation="true">
+<!--        <div style="position: sticky;position: -webkit-sticky;top: 1000px;">-->
+            <van-swipe-cell v-on:open="openAdd" :stop-propagation="true"
+                            >
                 <template slot="left">
                     <van-button square type="warning" text="COST"/>
                 </template>
@@ -33,6 +35,7 @@
                 </template>
             </van-swipe-cell>
 <!--        </van-sticky>-->
+<!--        </div>-->
 
         <add-spend v-bind:is-show="controlShowCOSTAdd"
                    v-on:close="controlShowCOSTAdd=false"
