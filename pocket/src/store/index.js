@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {addIncome, addSpend, getAllAffairs} from "../indexedDB/indexedDB";
+import {addIncome, addSpend, getAllAffairs, modifyIncome, modifySpend} from "../indexedDB/indexedDB";
 
 Vue.use(Vuex)
 
@@ -55,6 +55,14 @@ export default new Vuex.Store({
             await addIncome(payload.income)
             await context.dispatch("refresh")
         },
+        async modifySpend(context,payload){
+            await modifySpend(payload.spend.data,payload.spend.key)
+            await context.dispatch("refresh")
+        },
+        async modifyIncome(context,payload){
+            await modifyIncome(payload.income.data,payload.income.key)
+            await context.dispatch("refresh")
+        }
     },
     modules: {}
 })

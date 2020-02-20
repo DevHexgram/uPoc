@@ -85,6 +85,52 @@ export async function addSpend(cost) {
     });
 }
 
+export async function modifySpend(spend,key) {
+    spend.Number = spend.Number.replace(/-/g,"");
+    // console.log(spend.Number)
+    let affairs = {
+        // creat_at: Date(),
+        update_at: Date(),
+        delete_at: "",
+        type: '-',
+        data: {
+            Title: spend.Title,
+            Number: '-' + spend.Number,
+            Date: spend.Date,
+            Type: spend.Type,
+            Extra: spend.Extra
+        },
+    };
+    await storeForSpend.setItem(key,affairs).then(()=>{
+        console.log("done")
+    }).catch(e =>{
+        console.log(e)
+    })
+}
+
+export async function modifyIncome(spend,key) {
+    // spend.Number = spend.Number.replace(/-/g,"");
+    // console.log(spend.Number)
+    let affairs = {
+        // creat_at: Date(),
+        update_at: Date(),
+        delete_at: "",
+        type: '+',
+        data: {
+            Title: spend.Title,
+            Number: spend.Number,
+            Date: spend.Date,
+            Type: spend.Type,
+            Extra: spend.Extra
+        },
+    };
+    await storeForIncome.setItem(key,affairs).then(()=>{
+        console.log("done")
+    }).catch(e =>{
+        console.log(e)
+    })
+}
+
 export async function getAllAffairs() {
     let affairs = []
     let tempKey = 0
@@ -101,14 +147,14 @@ export async function getAllAffairs() {
     }).catch((err) => {
         console.log(err)
     })
-    await storeForIncome.iterate((value,key)=>{
-        affairs[tempKey]=value
+    await storeForIncome.iterate((value, key) => {
+        affairs[tempKey] = value
         affairs[tempKey].key = key
         tempKey++
         // console.log(tempKey)
-    }).then(()=>{
+    }).then(() => {
         // return
-    }).catch((err)=>{
+    }).catch((err) => {
         console.log(err)
     })
     // console.log(affairs)

@@ -29,7 +29,6 @@
                            v-on:click="showPicker=true"
                            :rules="[{ required: true, message: '请选择类型' }]"/>
                 <van-field label="日期"
-                           :placeholder="NowTime"
                            readonly
                            clickable
                            :rules="[{ required: true, message: '请选择日期' }]"
@@ -131,7 +130,7 @@
                 showCalendar: false,
                 showPicker: false,
                 showNumberKey: false,
-                NowTime: new Date().toLocaleDateString('zh-CN'),
+                // NowTime: new Date().toLocaleDateString('zh-CN'),
                 defaultDate: new Date(),
                 minDate: moment().subtract(6, 'months').toDate(),
                 maxDate: moment().add(2, 'months').toDate(),
@@ -208,7 +207,7 @@
             onConfirm(date) {
                 this.showCalendar = false;
                 this.cost.Date = date;
-            }
+            },
         },
     }
 </script>
