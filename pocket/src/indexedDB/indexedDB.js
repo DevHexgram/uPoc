@@ -89,17 +89,30 @@ export async function getAllAffairs() {
     let affairs = []
     let tempKey = 0
     // storeForSpend.config({storeName: "spend_list"})
-    return await storeForSpend.iterate((value, key) => {
+    await storeForSpend.iterate((value, key) => {
         affairs[tempKey] = value
         affairs[tempKey].key = key
         tempKey++
+        // console.log(tempKey)
         // console.log([key, value]);
     }).then(() => {
         // console.log(affairs)
-        return affairs
+        // return affairs
     }).catch((err) => {
         console.log(err)
     })
+    await storeForIncome.iterate((value,key)=>{
+        affairs[tempKey]=value
+        affairs[tempKey].key = key
+        tempKey++
+        // console.log(tempKey)
+    }).then(()=>{
+        // return
+    }).catch((err)=>{
+        console.log(err)
+    })
+    // console.log(affairs)
+    return affairs
     // return affairs
 }
 

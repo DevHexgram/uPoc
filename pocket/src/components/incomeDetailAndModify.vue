@@ -1,5 +1,6 @@
 <template>
     <div v-if="!(Object.keys(this.affair).length===0)">
+
         <van-popup
                 get-container="body"
                 v-model="isShow"
@@ -8,7 +9,7 @@
                 v-bind:close-on-click-overlay="false"
         >
             <van-form @submit="modify" ref="Form">
-
+<!--                嘤嘤嘤-->
                 <van-field v-model="affair.data.Title"
                            clickable
                            :disabled="isNotModifying"
@@ -16,7 +17,7 @@
                            :rules="[{ required: true, message: '请填写简述' }]"
                 />
                 <van-field v-bind:value="numberForShow"
-                           placeholder="-$0.00"
+                           placeholder="$0.00"
                            readonly
                            :disabled="isNotModifying"
                            clickable
@@ -63,25 +64,13 @@
                     @blur="showNumberKey = false"
                     extra-key="."
             />
-
-            <van-calendar v-model="showCalendar"
-                          @confirm="onConfirm"
-                          :show-confirm="false"
-                          get-container="body"
-                          title="Hex"
-                          :round="false"
-                          :min-date="minDate"
-                          :max-date="maxDate"
-                          :default-date="defaultDate"
-                          :style="{ height: '450px' }"
-            />
         </van-popup>
     </div>
 </template>
 
 <script>
     export default {
-        name: "detailAndModify",
+        name: "incomeDetailAndModify",
         props: {
             isShow: {
                 type: Boolean,
@@ -122,7 +111,7 @@
                 return this.formatDate(this.affair.data.Date)
             },
             numberForShow() {
-                return "$-" + this.affair.data.Number.replace("-", "")
+                return "$" + this.affair.data.Number.replace("-", "")
             },
         },
     }

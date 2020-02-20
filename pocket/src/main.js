@@ -21,6 +21,8 @@ import {
     Grid,
     GridItem,
     Image,
+    Tabbar,
+    TabbarItem,
 } from 'vant';
 
 // Vue.use(mlf);
@@ -42,6 +44,8 @@ Vue.use(Picker);
 Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Image);
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
 
 Vue.config.productionTip = false
 
