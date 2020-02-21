@@ -32,7 +32,7 @@ let storeForSpend = localForage.createInstance({
 
 export async function addIncome(income) {
     // console.log(cost)
-    let tempNumber = parseFloat(income.Number)
+    let tempNumber = Math.abs(parseFloat(income.Number));
     let affair = {
         creat_at: Date(),
         update_at: Date(),
@@ -61,7 +61,7 @@ export async function addIncome(income) {
 
 export async function addSpend(cost) {
     // console.log(cost)
-    let tempNumber = parseFloat(cost.Number) * -1;
+    let tempNumber = Math.abs(parseFloat(cost.Number)) * -1;
     let affair = {
         creat_at: Date(),
         update_at: Date(),
@@ -90,7 +90,7 @@ export async function addSpend(cost) {
 export async function modifySpend(spend,key,creatAt) {
     // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
-    let tempNumber = parseFloat(spend.Number) * -1;
+    let tempNumber = Math.abs(parseFloat(spend.Number)) * -1;
     let affairs = {
         creat_at: creatAt,
         update_at: Date(),
@@ -114,7 +114,7 @@ export async function modifySpend(spend,key,creatAt) {
 export async function modifyIncome(spend,key,creatAt) {
     // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
-    let tempNumber = parseFloat(spend.Number)
+    let tempNumber = Math.abs(parseFloat(spend.Number))
     let affairs = {
         creat_at: creatAt,
         update_at: Date(),

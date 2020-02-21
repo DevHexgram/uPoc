@@ -21,6 +21,7 @@
                               icon="tosend"
                               size="large"
                               :title="printDifferentMonth(indexAll)"
+                              :value="test(indexAll)"
                     >
                     </van-cell>
                 </van-sticky>
@@ -34,10 +35,10 @@
                                   :border="true"
                                   :title="Affair.data.Title"
                                   :value="Affair.data.Number"/>
-<!--                        <template slot="right">-->
-<!--                            <van-button square type="danger" text="删除"/>-->
-<!--                            <van-button square type="primary" text="收藏"/>-->
-<!--                        </template>-->
+                        <!--                        <template slot="right">-->
+                        <!--                            <van-button square type="danger" text="删除"/>-->
+                        <!--                            <van-button square type="primary" text="收藏"/>-->
+                        <!--                        </template>-->
                     </van-swipe-cell>
                 </div>
             </div>
@@ -112,12 +113,31 @@
             //     return false
             // }
             // },
-            printDifferentMonth: function (index) {
+            printDifferentMonth: function (indexAll) {
                 // console.log(index)
-                if (this.AffairArray[index][0] === undefined) {
+                if (this.AffairArray[indexAll][0] === undefined) {
                     return undefined
                 }
-                return this.AffairArray[index][0].data.Date.getFullYear() + "." + (this.AffairArray[index][0].data.Date.getMonth() + 1)
+                return this.AffairArray[indexAll][0].data.Date.getFullYear() + "." + (this.AffairArray[indexAll][0].data.Date.getMonth() + 1)
+            },
+            test: function (indexAll) {
+                let totalIncome = 0;
+                let totalSpend = 0;
+                let affair;
+                if (this.AffairArray[indexAll][0] === undefined) {
+                    return
+                }
+                for (affair in this.AffairArray[indexAll]) {
+                    // console.log(affair)
+                    if (this.AffairArray[indexAll][affair].type === "+") {
+                        // console.log(1)
+                        totalIncome = totalIncome + parseFloat(this.AffairArray[indexAll][affair].data.Number);
+                    } else {
+                        totalSpend = totalSpend + parseFloat(this.AffairArray[indexAll][affair].data.Number);
+                    }
+                }
+                // console.log("收入:"+totalIncome+"支出:"+totalSpend)
+                return "收入:"+totalIncome+"支出:"+totalSpend
             }
             // getAffairs: async function () {
             //     await getAllAffairs().then((value) => {
