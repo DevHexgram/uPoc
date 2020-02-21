@@ -34,10 +34,10 @@
                                   :border="true"
                                   :title="Affair.data.Title"
                                   :value="Affair.data.Number"/>
-                        <template slot="right">
-                            <van-button square type="danger" text="删除"/>
-                            <van-button square type="primary" text="收藏"/>
-                        </template>
+<!--                        <template slot="right">-->
+<!--                            <van-button square type="danger" text="删除"/>-->
+<!--                            <van-button square type="primary" text="收藏"/>-->
+<!--                        </template>-->
                     </van-swipe-cell>
                 </div>
             </div>

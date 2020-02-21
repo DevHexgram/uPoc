@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import myCharts from "./myCharts/myCharts";
 
 import {
     Tab,
@@ -25,6 +26,7 @@ import {
     TabbarItem,
 } from 'vant';
 
+Vue.use(myCharts);
 // Vue.use(mlf);
 
 Vue.use(Tab);
