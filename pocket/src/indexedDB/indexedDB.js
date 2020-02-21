@@ -32,6 +32,7 @@ let storeForSpend = localForage.createInstance({
 
 export async function addIncome(income) {
     // console.log(cost)
+    let tempNumber = parseFloat(income.Number)
     let affair = {
         creat_at: Date(),
         update_at: Date(),
@@ -39,7 +40,7 @@ export async function addIncome(income) {
         type: '+',
         data: {
             Title: income.Title,
-            Number: income.Number,
+            Number: tempNumber,
             Date: income.Date,
             Type: income.Type,
             Extra: income.Extra
@@ -60,6 +61,7 @@ export async function addIncome(income) {
 
 export async function addSpend(cost) {
     // console.log(cost)
+    let tempNumber = parseFloat(cost.Number) * -1;
     let affair = {
         creat_at: Date(),
         update_at: Date(),
@@ -67,7 +69,7 @@ export async function addSpend(cost) {
         type: '-',
         data: {
             Title: cost.Title,
-            Number: '-' + cost.Number,
+            Number: tempNumber,
             Date: cost.Date,
             Type: cost.Type,
             Extra: cost.Extra
@@ -85,17 +87,18 @@ export async function addSpend(cost) {
     });
 }
 
-export async function modifySpend(spend,key) {
-    spend.Number = spend.Number.replace(/-/g,"");
+export async function modifySpend(spend,key,creatAt) {
+    // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
+    let tempNumber = parseFloat(spend.Number) * -1;
     let affairs = {
-        // creat_at: Date(),
+        creat_at: creatAt,
         update_at: Date(),
         delete_at: "",
         type: '-',
         data: {
             Title: spend.Title,
-            Number: '-' + spend.Number,
+            Number: tempNumber,
             Date: spend.Date,
             Type: spend.Type,
             Extra: spend.Extra
@@ -108,17 +111,18 @@ export async function modifySpend(spend,key) {
     })
 }
 
-export async function modifyIncome(spend,key) {
+export async function modifyIncome(spend,key,creatAt) {
     // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
+    let tempNumber = parseFloat(spend.Number)
     let affairs = {
-        // creat_at: Date(),
+        creat_at: creatAt,
         update_at: Date(),
         delete_at: "",
         type: '+',
         data: {
             Title: spend.Title,
-            Number: spend.Number,
+            Number: tempNumber,
             Date: spend.Date,
             Type: spend.Type,
             Extra: spend.Extra

@@ -95,6 +95,7 @@
                         this.controlShowIncomeDetails = true
                     }
                     this.tempAffair = this.AffairArray[indexAll][index]
+                    this.tempAffair.data.Number = this.tempAffair.data.Number.toString()
                     // console.log(this.Affairs[index])
                 }
             },

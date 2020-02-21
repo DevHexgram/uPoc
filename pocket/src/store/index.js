@@ -56,11 +56,12 @@ export default new Vuex.Store({
             await context.dispatch("refresh")
         },
         async modifySpend(context,payload){
-            await modifySpend(payload.spend.data,payload.spend.key)
+            // console.log(payload.spend)
+            await modifySpend(payload.spend.data,payload.spend.key,payload.spend.creat_at);
             await context.dispatch("refresh")
         },
         async modifyIncome(context,payload){
-            await modifyIncome(payload.income.data,payload.income.key)
+            await modifyIncome(payload.income.data,payload.income.key,payload.income.creat_at);
             await context.dispatch("refresh")
         }
     },
