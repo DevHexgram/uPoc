@@ -158,6 +158,7 @@
         methods: {
             control() {
                 this.isNotModifying = true
+                store.dispatch("refresh")
                 this.$emit('close', this.isShow)
             },
             submitForm() {
