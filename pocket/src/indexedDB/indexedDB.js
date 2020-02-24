@@ -87,7 +87,7 @@ export async function addSpend(cost) {
     });
 }
 
-export async function modifySpend(spend,key,creatAt) {
+export async function modifySpend(spend, key, creatAt) {
     // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
     let tempNumber = Math.abs(parseFloat(spend.Number)) * -1;
@@ -104,14 +104,14 @@ export async function modifySpend(spend,key,creatAt) {
             Extra: spend.Extra
         },
     };
-    await storeForSpend.setItem(key,affairs).then(()=>{
+    await storeForSpend.setItem(key, affairs).then(() => {
         console.log("done")
-    }).catch(e =>{
+    }).catch(e => {
         console.log(e)
     })
 }
 
-export async function modifyIncome(spend,key,creatAt) {
+export async function modifyIncome(spend, key, creatAt) {
     // spend.Number = spend.Number.replace(/-/g,"");
     // console.log(spend.Number)
     let tempNumber = Math.abs(parseFloat(spend.Number))
@@ -128,9 +128,9 @@ export async function modifyIncome(spend,key,creatAt) {
             Extra: spend.Extra
         },
     };
-    await storeForIncome.setItem(key,affairs).then(()=>{
+    await storeForIncome.setItem(key, affairs).then(() => {
         console.log("done")
-    }).catch(e =>{
+    }).catch(e => {
         console.log(e)
     })
 }
@@ -150,7 +150,7 @@ export async function getAllAffairs() {
         // return affairs
     }).catch((err) => {
         console.log(err)
-    })
+    });
     await storeForIncome.iterate((value, key) => {
         affairs[tempKey] = value
         affairs[tempKey].key = key
@@ -160,9 +160,25 @@ export async function getAllAffairs() {
         // return
     }).catch((err) => {
         console.log(err)
-    })
+    });
     // console.log(affairs)
     return affairs
     // return affairs
+}
+
+export async function deleteAffair(key, type) {
+    if (type === "-") {
+        storeForSpend.removeItem(key).then(()=>{
+            console.log("done")
+        }).catch((err)=>{
+            console.log(err)
+        })
+    } else if (type === "+") {
+        storeForIncome.removeItem(key).then(()=>{
+            console.log("done")
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
 }
 

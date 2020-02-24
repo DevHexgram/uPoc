@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {addIncome, addSpend, getAllAffairs, modifyIncome, modifySpend} from "../indexedDB/indexedDB";
+import {addIncome, addSpend, deleteAffair, getAllAffairs, modifyIncome, modifySpend} from "../indexedDB/indexedDB";
 
 Vue.use(Vuex)
 
@@ -31,11 +31,11 @@ export default new Vuex.Store({
                 // console.log("i:", i)
                 // console.log(result)
                 if (tempAffairs[i].data.Date.getMonth() !== tempAffairs[i + 1].data.Date.getMonth()) {
-                    result.push(tempAffairs.slice(key, i+1)) //slice包含start,不包含end
+                    result.push(tempAffairs.slice(key, i + 1)) //slice包含start,不包含end
                     key = i + 1
                 }
             }
-            result.push(tempAffairs.slice(key , length))
+            result.push(tempAffairs.slice(key, length))
             // console.log(result)
             return result
         },
@@ -55,13 +55,18 @@ export default new Vuex.Store({
             await addIncome(payload.income)
             await context.dispatch("refresh")
         },
-        async modifySpend(context,payload){
+        async modifySpend(context, payload) {
             // console.log(payload.spend)
-            await modifySpend(payload.spend.data,payload.spend.key,payload.spend.creat_at);
+            await modifySpend(payload.spend.data, payload.spend.key, payload.spend.creat_at);
             await context.dispatch("refresh")
         },
-        async modifyIncome(context,payload){
-            await modifyIncome(payload.income.data,payload.income.key,payload.income.creat_at);
+        async modifyIncome(context, payload) {
+            await modifyIncome(payload.income.data, payload.income.key, payload.income.creat_at);
+            await context.dispatch("refresh")
+        },
+        async deleteAffair(context, payload) {
+            // console.log(payload.Affair)
+            await deleteAffair(payload.Affair.key, payload.Affair.type)
             await context.dispatch("refresh")
         }
     },

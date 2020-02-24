@@ -21,7 +21,7 @@
                               icon="tosend"
                               size="large"
                               :title="printDifferentMonth(indexAll)"
-                              :value="test(indexAll)"
+                              :value="showAnalysis(indexAll)"
                     >
                     </van-cell>
                 </van-sticky>
@@ -35,10 +35,10 @@
                                   :border="true"
                                   :title="Affair.data.Title"
                                   :value="Affair.data.Number"/>
-                        <!--                        <template slot="right">-->
-                        <!--                            <van-button square type="danger" text="删除"/>-->
-                        <!--                            <van-button square type="primary" text="收藏"/>-->
-                        <!--                        </template>-->
+                        <template slot="right">
+                            <van-button square type="danger" text="删除"/>
+                            <!--                                                    <van-button square type="primary" text="收藏"/>-->
+                        </template>
                     </van-swipe-cell>
                 </div>
             </div>
@@ -67,6 +67,7 @@
     import store from "../store/index"
     import detailAndModify from "./detailAndModify";
     import incomeDetailAndModify from "./incomeDetailAndModify";
+    import {Dialog} from 'vant';
 
     export default {
         name: "spendsItemList",
@@ -98,7 +99,18 @@
                     this.tempAffair = this.AffairArray[indexAll][index]
                     this.tempAffair.data.Number = this.tempAffair.data.Number.toString()
                     // console.log(this.Affairs[index])
+                } else if (position.position === "right") {
+                    Dialog.confirm({
+                        title: 'warning',
+                        message: '确定要删除吗'
+                    }).then(() => {
+                        // on confirm
+                        store.dispatch("deleteAffair",{Affair:this.AffairArray[indexAll][index]})
+                    }).catch(() => {
+                        // on cancel
+                    });
                 }
+
             },
             // compareMonth: function (index) {
             // console.log(this.Affairs[index].data.Date)
@@ -120,7 +132,7 @@
                 }
                 return this.AffairArray[indexAll][0].data.Date.getFullYear() + "." + (this.AffairArray[indexAll][0].data.Date.getMonth() + 1)
             },
-            test: function (indexAll) {
+            showAnalysis: function (indexAll) {
                 let totalIncome = 0;
                 let totalSpend = 0;
                 let affair;
@@ -137,7 +149,7 @@
                     }
                 }
                 // console.log("收入:"+totalIncome+"支出:"+totalSpend)
-                return "收入:"+totalIncome+"支出:"+totalSpend
+                return "收入:" + totalIncome + "支出:" + totalSpend
             }
             // getAffairs: async function () {
             //     await getAllAffairs().then((value) => {
