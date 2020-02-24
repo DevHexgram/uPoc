@@ -45,18 +45,22 @@ export async function addIncome(income) {
             Type: income.Type,
             Extra: income.Extra
         },
-    }
+    };
+    let newKey = Date.parse(Date());
     // await localForage.config({storeName: "income_list"})
     // console.log(localForage.config())
-    await storeForIncome.length().then((numberOfKeys) => {
-        storeForIncome.setItem((numberOfKeys + 1).toString(), affair).then(() => {
-            // console.log("done")
-        }).catch(e => {
-            console.log(e)
-        })
-    }).catch((err) => {
-        console.log(err);
-    });
+    // await storeForIncome.length().then((numberOfKeys) => {
+    //     while (numberOfKeys in storeForIncome) {
+    //         numberOfKeys++
+    //     }
+    storeForIncome.setItem(newKey.toString(), affair).then(() => {
+        // console.log("done")
+    }).catch(e => {
+        console.log(e)
+    })
+    // }).catch((err) => {
+    //     console.log(err);
+    // });
 }
 
 export async function addSpend(cost) {
@@ -76,15 +80,33 @@ export async function addSpend(cost) {
         },
     }
     // await localForage.config({storeName: "spend_list"})
-    await storeForSpend.length().then((numberOfKeys) => {
-        storeForSpend.setItem((numberOfKeys + 1).toString(), affair).then(() => {
-            // console.log("done")
-        }).catch(e => {
-            console.log(e)
-        })
-    }).catch((err) => {
-        console.log(err);
-    });
+    // await storeForSpend.length().then((numberOfKeys) => {
+    let newKey = Date.parse(Date());
+// console.log(newKey)
+    // storeForSpend.key(numberOfKeys-1).then((value) => {
+    // if (value === null) {
+    //     newKey = numberOfKeys + 1
+    // } else {
+    //     numberOfKeys++
+    // }
+    // console.log(value)
+    // })
+    // while (storeForSpend.getItem(numberOfKeys.toString()) != null) {
+    //     numberOfKeys++
+    //     console.log(1)
+    //         if (numberOfKeys>=100) {break;}
+    // }
+    storeForSpend.setItem(newKey.toString(), affair).then(() => {
+        console.log("done")
+    }).catch(e => {
+        console.log(e)
+    })
+// }
+
+// ).
+// catch((err) => {
+//     console.log(err);
+// });
 }
 
 export async function modifySpend(spend, key, creatAt) {
@@ -168,17 +190,20 @@ export async function getAllAffairs() {
 
 export async function deleteAffair(key, type) {
     if (type === "-") {
-        storeForSpend.removeItem(key).then(()=>{
+        storeForSpend.removeItem(key).then(() => {
             console.log("done")
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err)
         })
     } else if (type === "+") {
-        storeForIncome.removeItem(key).then(()=>{
+        storeForIncome.removeItem(key).then(() => {
             console.log("done")
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err)
         })
     }
 }
 
+// function genRandom() {
+//
+// }
