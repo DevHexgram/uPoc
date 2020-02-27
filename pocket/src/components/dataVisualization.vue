@@ -9,7 +9,8 @@
                 get-container="body"
         >
             {{MonthDate}}
-            <div id="extra" style="width: 100%;height:300px;"></div>
+<!--            {{clientWidth}}-->
+            <div id="extra" :style="{width: clientWidth+'px',height:clientHeight*0.3+'px'}"></div>
         </van-popup>
     </div>
 </template>
@@ -18,6 +19,12 @@
 
     export default {
         name: "dataVisualization",
+        data(){
+            return{
+                clientWidth :document.body.clientWidth,
+                clientHeight:document.body.clientHeight,
+            }
+        },
         model: {
             prop: "isShow",
             event: "close",
