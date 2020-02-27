@@ -165,10 +165,10 @@
                 type: Boolean,
                 default: false
             },
-            windowType: {
-                type: String,
-                default: "addSpend",
-            }
+            // windowType: {
+            //     type: String,
+            //     default: "addSpend",
+            // }
         },
         methods: {
             submitForm() {

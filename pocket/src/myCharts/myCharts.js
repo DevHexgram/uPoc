@@ -7,57 +7,33 @@
 // import store from '../store/index'
 const echarts = require('echarts');
 
-const install = function (Vue) {
+const install = function(Vue) {
     Object.defineProperties(Vue.prototype, {
         $chart: {
             get() {
                 return {
-                    init: function (id) {
-                        // console.log(1)
+                    //画一条简单的线
+                    line1: function (id) {
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
-                            // $.get()
-                        let option = {
-                            title: {
-                                text: '异步数据加载示例'
-                            },
-                            tooltip: {},
-                            legend: {
-                                data:['支出']
-                            },
+
+                        const optionData = {
                             xAxis: {
-                                data: []
+                                type: 'category',
+                                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                             },
-                            yAxis: {},
+                            yAxis: {
+                                type: 'value'
+                            },
                             series: [{
-                                name: '支出',
-                                type: 'bar',
-                                data: []
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: 'line',
+                                smooth: true
                             }]
                         };
-// console.log(2)
-                        // this.chart.showLoading();
-                        // setTimeout("console.log(1)",5000);
-                        // console.log(store.getters.AffairSorted);
 
-
-                        // 使用刚指定的配置项和数据显示图表。
-                        this.chart.setOption(option);
+                        this.chart.setOption(optionData);
                     },
-                    update:function (id,Monthaffairs) {
-                        // console.log(1)
-                        this.chart = echarts.init(document.getElementById(id));
-                        this.chart.setOption({
-                            xAxis:{
-                              data:Monthaffairs.Date
-                              //   data:['1','2','3']
-                            },
-                            series:[{
-                               name:'支出',
-                               data:Monthaffairs.spends
-                            }],
-                        })
-                    }
                 }
             }
         }

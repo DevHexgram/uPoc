@@ -37,6 +37,7 @@ export default new Vuex.Store({
             }
             result.push(tempAffairs.slice(key, length))
             // console.log(result)
+            // console.log(2)
             return result
         },
     },
