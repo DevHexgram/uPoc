@@ -16,7 +16,7 @@ export function dealMonthData(MonthData) {
             // console.log(1)
         } else if (MonthData[index].type==="-") {
             // console.log(MonthData[index].data.Date.getDate())
-            MonthSpend[MonthData[index].data.Date.getDate()]+=MonthData[index].data.Number
+            MonthSpend[MonthData[index].data.Date.getDate()]+=-MonthData[index].data.Number
         }
     }
     // console.log(MonthIncome);

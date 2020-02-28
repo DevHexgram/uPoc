@@ -7,6 +7,7 @@
                 v-on:click-overlay="control"
                 v-bind:close-on-click-overlay="false"
                 get-container="body"
+                :style="{height: clientHeight*0.75+'px'}"
         >
 <!--            {{MonthDate}}-->
 <!--            {{clientWidth}}-->
