@@ -5,34 +5,52 @@
 // require('echarts/lib/component/tooltip');
 // require('echarts/lib/component/title');
 // import store from '../store/index'
+import {dealMonthData} from "./dataHandle";
+
 const echarts = require('echarts');
 
-const install = function(Vue) {
+const install = function (Vue) {
     Object.defineProperties(Vue.prototype, {
         $chart: {
             get() {
                 return {
                     //画一条简单的线
-                    line1: function (id) {
+                    line1: function (id, MonthData) {
+                        let dataForShow = [];
+                        dataForShow = dealMonthData(MonthData)
+                        console.log(dataForShow)
+
                         this.chart = echarts.init(document.getElementById(id));
                         this.chart.clear();
 
-                        const optionData = {
+                        const option = {
+                            title: {
+                                text: 'ECharts 入门示例'
+                            },
+                            tooltip: {},
+                            legend: {
+                                data:['销量']
+                            },
                             xAxis: {
-                                type: 'category',
-                                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun','test','test1']
+                                data: dataForShow[0]
                             },
-                            yAxis: {
-                                type: 'value'
-                            },
+                            yAxis: {},
                             series: [{
-                                data: [820, 932, 901, 934, 1290, 1330, 1320,1111,1111],
-                                type: 'line',
-                                smooth: true
+                                name: '支出',
+                                type: 'bar',
+                                data: dataForShow[1]
+                            },{
+                                name:'收入',
+                                type:'bar',
+                                data:dataForShow[2]
                             }]
                         };
 
-                        this.chart.setOption(optionData);
+                        this.chart.setOption(option);
+                        // this.chart.on('click', function (params) {
+                            // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+                            // console.log(params.value)
+                        // });
                     },
                 }
             }

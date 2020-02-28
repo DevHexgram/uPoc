@@ -8,7 +8,7 @@
                 v-bind:close-on-click-overlay="false"
                 get-container="body"
         >
-            {{MonthDate}}
+<!--            {{MonthDate}}-->
 <!--            {{clientWidth}}-->
             <div id="extra" :style="{width: clientWidth+'px',height:clientHeight*0.3+'px'}"></div>
         </van-popup>
@@ -16,8 +16,9 @@
 </template>
 
 <script>
+// import {dealMonthData} from "../myCharts/dataHandle";
 
-    export default {
+export default {
         name: "dataVisualization",
         data(){
             return{
@@ -51,7 +52,10 @@
           isShow:function () {
               if (this.isShow === true){
                   // try {
-                      this.$chart.line1("extra")
+                  // let temp =[];
+                  // temp=dealMonthData(this.MonthDate);
+                  // console.log(temp);
+                      this.$chart.line1("extra",this.MonthDate);
                   // }
                   // finally {
                   //     console.log("wrong")
