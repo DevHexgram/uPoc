@@ -26,10 +26,13 @@
 
         <van-tabbar route>
             <van-tabbar-item replace to="/" icon="home-o">
-                标签
+                item
             </van-tabbar-item>
             <van-tabbar-item replace to="/about" icon="search">
-                标签
+                analysis
+            </van-tabbar-item>
+            <van-tabbar-item replace to="/config" icon="setting-o">
+                config
             </van-tabbar-item>
         </van-tabbar>
         <!--                <router-view/>-->

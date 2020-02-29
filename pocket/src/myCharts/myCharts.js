@@ -38,7 +38,7 @@ const install = function (Vue) {
                                 // 映射的最小值为 80
                                 min: 10,
                                 // 映射的最大值为 600
-                                max: 500,
+                                max: 800,
                                 inRange: {
                                     // 明暗度的范围是 0 到 1
                                     colorLightness: [0.9,0.1]
@@ -100,7 +100,7 @@ const install = function (Vue) {
                                         shadowOffsetY: 0,
                                         // 阴影颜色
                                         shadowColor: 'rgba(0, 0, 0, 0.5)',
-                                        color: '#FF7500',
+                                        color: '#EF7A82',
                                     },
                                     label: {
                                         normal: {
@@ -147,14 +147,14 @@ const install = function (Vue) {
                                 axisPointer:{
                                     handle: {
                                         size:"20",
-                                        margin:"30",
+                                        margin:"15",
                                         show: true,
                                         color: '#004E52'
                                     }
                                 },
                             },
                             yAxis: {},
-                            // grid: {top: '60%', bottom: '10%'},
+                            grid: {top: '10%', bottom: '15%'},
                             series: [{
                                 name: '支出',
                                 type: 'bar',
