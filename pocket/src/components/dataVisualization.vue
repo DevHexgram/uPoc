@@ -11,7 +11,7 @@
         >
 <!--            {{MonthDate}}-->
 <!--            {{clientWidth}}-->
-            <div id="extra" :style="{width: clientWidth+'px',height:clientHeight*0.3+'px'}"></div>
+            <div id="extra" :style="{width: clientWidth+'px',height:clientHeight*0.75+'px'}"></div>
         </van-popup>
     </div>
 </template>

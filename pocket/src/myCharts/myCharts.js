@@ -27,29 +27,90 @@ const install = function (Vue) {
                             title: {
                                 text: 'ECharts 入门示例'
                             },
-                            tooltip: {},
+                            tooltip: {
+                                // trigger: 'axis',
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b}: {c} ({d}%)'
+                            },
                             legend: {
-                                data:['销量']
+                                data: ['销量']
                             },
                             xAxis: {
                                 data: dataForShow[0]
                             },
                             yAxis: {},
+                            grid: {top: '60%',bottom:'10%'},
                             series: [{
                                 name: '支出',
                                 type: 'bar',
-                                data: dataForShow[1]
-                            },{
-                                name:'收入',
-                                type:'bar',
-                                data:dataForShow[2]
-                            }]
+                                data: dataForShow[1],
+                                animationDelay: function (idx) {
+                                    return idx * 50;
+                                }
+                            }, {
+                                name: '收入',
+                                type: 'bar',
+                                data: dataForShow[2],
+                                animationDelay: function (idx) {
+                                    return idx * 50 + 300;
+                                }
+                            },
+                                {
+                                    name: '收入',
+                                    type: 'pie',
+                                    radius: ['20%','30%'],
+                                    center: ['25%', '20%'],
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '10',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    // roseType: 'angle',
+                                    data:
+                                        dataForShow[3][0]
+
+                                },
+                                {
+                                    name: '支出',
+                                    type: 'pie',
+                                    radius: ['20%','30%'],
+                                    center: ['75%', '20%'],
+                                    label: {
+                                        normal: {
+                                            show: false,
+                                            position: 'center'
+                                        },
+                                        emphasis: {
+                                            show: true,
+                                            textStyle: {
+                                                fontSize: '10',
+                                                fontWeight: 'bold'
+                                            }
+                                        }
+                                    },
+                                    // roseType: 'angle',
+                                    data:
+                                        dataForShow[3][1]
+
+                                }],
+                            animationEasing: 'elasticOut',
+                            // animationDelayUpdate: function (idx) {
+                            //     return idx * 5;
+                            // }
                         };
 
                         this.chart.setOption(option);
                         // this.chart.on('click', function (params) {
-                            // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
-                            // console.log(params.value)
+                        // window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+                        // console.log(params.value)
                         // });
                     },
                 }
