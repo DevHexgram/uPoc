@@ -26,22 +26,22 @@ function getTypeData(MonthData) {
     for (index in MonthData) {
         switch (MonthData[index].data.Type) {
             case "日常费用":
-                spendList[0].value += MonthData[index].data.Number;
+                spendList[0].value += -MonthData[index].data.Number;
                 break;
             case "固定支出":
-                spendList[1].value += MonthData[index].data.Number;
+                spendList[1].value += -MonthData[index].data.Number;
                 break;
             case "大项消费":
-                spendList[2].value += MonthData[index].data.Number;
+                spendList[2].value += -MonthData[index].data.Number;
                 break;
             case "往来开销":
-                spendList[3].value += MonthData[index].data.Number;
+                spendList[3].value += -MonthData[index].data.Number;
                 break;
             case "娱乐开支":
-                spendList[4].value += MonthData[index].data.Number;
+                spendList[4].value += -MonthData[index].data.Number;
                 break;
             case "其它消费":
-                spendList[5].value += MonthData[index].data.Number;
+                spendList[5].value += -MonthData[index].data.Number;
                 break;
             case "工作收入":
                 incomeList[0].value += MonthData[index].data.Number;
@@ -61,6 +61,16 @@ function getTypeData(MonthData) {
                 break;
         }
     }
+    // for (index in incomeList) {
+    //     if (incomeList[index].value===0){
+    //         incomeList.splice(index,1)
+    //     }
+    // }
+    // for (index in spendList) {
+    //     if (spendList[index].value===0){
+    //         spendList.splice(index,1)
+    //     }
+    // }
     // console.log(incomeList);
     // console.log(spendList);
     let result=[];
@@ -72,7 +82,7 @@ function getTypeData(MonthData) {
 function getTotalData(MonthData) {
     // console.log(MonthData);
     let DaysOfMonth = getDaysArray(MonthData[0].data.Date.getFullYear(), MonthData[0].data.Date.getMonth() + 1);
-    let MonthLength = DaysOfMonth.length - 1;
+    let MonthLength = DaysOfMonth.length ;
     // console.log(MonthLength);
     let MonthSpend = Array(MonthLength + 1).fill(0);
     let MonthIncome = Array(MonthLength + 1).fill(0);
@@ -103,7 +113,6 @@ const getDaysArray = (year, month) => {
     //     ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
     const date = new Date(year, month - 1, 1);
     const result = [];
-    result[0] = "days";
     while (date.getMonth() === month - 1) {
         // result.push(`${date.getDate()}-${names[date.getDay()]}`);
         result.push(`${date.getDate()}`);

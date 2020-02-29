@@ -11,7 +11,8 @@
         >
 <!--            {{MonthDate}}-->
 <!--            {{clientWidth}}-->
-            <div id="extra" :style="{width: clientWidth+'px',height:clientHeight*0.75+'px'}"></div>
+            <div id="pies" :style="{width: clientWidth+'px',height:clientHeight*0.25+'px'}"></div>
+            <div id="bars" :style="{width: clientWidth+'px',height:clientHeight*0.25+'px'}"></div>
         </van-popup>
     </div>
 </template>
@@ -56,7 +57,7 @@ export default {
                   // let temp =[];
                   // temp=dealMonthData(this.MonthDate);
                   // console.log(temp);
-                      this.$chart.line1("extra",this.MonthDate);
+                      this.$chart.line1("pies","bars",this.MonthDate);
                   // }
                   // finally {
                   //     console.log("wrong")
