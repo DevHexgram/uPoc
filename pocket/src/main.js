@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import myCharts from "./myCharts/myCharts";
 
+// import 'vant/lib/index.less';
+
 import {
     Tab,
     Tabs,
