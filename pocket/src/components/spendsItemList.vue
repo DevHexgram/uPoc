@@ -28,14 +28,14 @@
 
                 <div v-for="(Affair,index) in AffairGroup" v-bind:key="Affair.creat_at">
                     <van-swipe-cell v-on:open="openSth($event,index,indexAll)">
-                        <template slot="left">
+                        <template v-slot:left>
                             <van-button square type="primary" text="详情"/>
                         </template>
                         <van-cell size="large"
                                   :border="true"
                                   :title="Affair.data.Title"
                                   :value="Affair.data.Number"/>
-                        <template slot="right">
+                        <template v-slot:right>
                             <van-button square type="danger" text="删除"/>
                             <!--                                                    <van-button square type="primary" text="收藏"/>-->
                         </template>

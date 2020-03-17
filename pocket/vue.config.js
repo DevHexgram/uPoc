@@ -15,19 +15,19 @@ module.exports = {
     publicPath: './',
     css: {
         loaderOptions: {
-            // postcss: {
-            //     config: {
-            //         path: '.'
-            //     }
-            // },
+            postcss: {
+                config: {
+                    path: '.'
+                }
+            },
             less: {
                 sourceMap: true,
                 javascriptEnabled: true,
                 modifyVars: {
                     'hack': `true; @import "${resolve('src')}/assets/vant.less";`
                     // 'hack': `true; @import "./src/assets/vant.less";`
-                }
-            }
-        }
+                },
+            },
+        },
     },
 };

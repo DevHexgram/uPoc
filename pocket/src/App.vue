@@ -1,6 +1,7 @@
 <template>
 
     <div>
+
         <!--        get-container="body"-->
 <!--        <van-tabs animated swipeable sticky>-->
 <!--            <van-tab title="账目">-->

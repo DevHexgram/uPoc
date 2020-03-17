@@ -26,6 +26,7 @@ import {
     Image,
     Tabbar,
     TabbarItem,
+    Card,
 } from 'vant';
 
 Vue.use(myCharts);
@@ -50,6 +51,7 @@ Vue.use(GridItem);
 Vue.use(Image);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
+Vue.use(Card);
 
 Vue.config.productionTip = false
 
