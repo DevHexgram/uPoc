@@ -15,11 +15,11 @@ module.exports = {
     publicPath: './',
     css: {
         loaderOptions: {
-            // postcss: {
-            //     config: {
-            //         path: '.'
-            //     }
-            // },
+            postcss: {
+                config: {
+                    path: '.'
+                }
+            },
             less: {
                 sourceMap: true,
                 javascriptEnabled: true,
