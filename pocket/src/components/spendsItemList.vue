@@ -15,8 +15,9 @@
             <div v-for="(AffairGroup,indexAll) in AffairArray" v-bind:key="indexAll">
                 <!--            <div>{{Affair}}</div>-->
                 <!--            <div>{{index}}</div>-->
-                <van-sticky offset-top="44">
-                    <van-cell :border="true"
+<!--                <van-sticky :offset-top="44">-->
+                <div class="sticky">
+                    <van-cell :border="false"
                               style="background-color: RGBA(112,243,255,0.95)"
                               icon="tosend"
                               size="large"
@@ -24,7 +25,8 @@
                               :value="showAnalysis(indexAll)"
                     >
                     </van-cell>
-                </van-sticky>
+                </div>
+<!--                </van-sticky>-->
 
                 <div v-for="(Affair,index) in AffairGroup" v-bind:key="Affair.creat_at">
                     <van-swipe-cell v-on:open="openSth($event,index,indexAll)">
@@ -32,9 +34,11 @@
                             <van-button square type="primary" text="详情"/>
                         </template>
                         <van-cell size="large"
-                                  :border="true"
+                                  :border="false"
                                   :title="Affair.data.Title"
-                                  :value="Affair.data.Number"/>
+                                  :value="Affair.data.Number"
+
+                        />
                         <template v-slot:right>
                             <van-button square type="danger" text="删除"/>
                             <!--                                                    <van-button square type="primary" text="收藏"/>-->
@@ -177,5 +181,10 @@
 </script>
 
 <style scoped>
-
+    .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 44px;
+        z-index: 1;
+    }
 </style>

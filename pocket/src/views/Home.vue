@@ -6,7 +6,6 @@
         <van-sticky>
             <add-control/>
         </van-sticky>
-
         <spends-item-list/>
     </div>
 </template>

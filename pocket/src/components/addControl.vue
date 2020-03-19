@@ -5,18 +5,20 @@
             <template slot="left">
                 <van-button square type="warning" text="COST"/>
             </template>
-            <van-cell :border="false" title="" value="" style="background-color: RGBA(62,237,231,0.95)" size ="large" clickable>
-                <van-icon
-                        slot="right-icon"
-                        name="balance-o"
-                        style="line-height: inherit;"
-                        size="25"
-                />
+            <van-cell :border="false" title="" value="" style="background-color: RGBA(62,237,231,1)" size ="large" clickable>
+                <template #right-icon>
+                    <van-icon
+                            name="balance-o"
+                            style="line-height: inherit"
+                            size="2em"
+                    />
+                </template>
+
                 <van-icon
                         slot="icon"
                         name="after-sale"
                         style="line-height: inherit;"
-                        size="25"
+                        size="2em"
                 />
             </van-cell>
             <template slot="right">
