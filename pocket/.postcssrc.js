@@ -8,7 +8,7 @@ module.exports = {
     "postcss-import": {},
     "postcss-url": {},
     'autoprefixer': {
-      browsers: ['Android >= 4.0', 'iOS >= 8']
+      overrideBrowsersList: ['Android >= 4.0', 'iOS >= 8']
     },
     // 'postcss-pxtorem': {
     //   rootValue: 10,
