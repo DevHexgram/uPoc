@@ -22,8 +22,13 @@ const routes = [
     path:'/config',
     name:'Config',
     component:() => import('../views/Config')
+  },
+  {
+    path:'/test',
+    name:'Test',
+    component:()=> import('../views/test')
   }
-]
+];
 
 const router = new VueRouter({
   routes
